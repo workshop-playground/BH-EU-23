@@ -39,11 +39,11 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Packaging Action
         uses: moractions/fake-packaging-action@v1.0.0
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./my-app
-          destination: ./_site      
+      #- name: Build with Jekyll
+       # uses: actions/jekyll-build-pages@v1
+        #with:
+         # source: ./my-app
+         # destination: ./_site      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
       - name: Stop and Check Tracee results and create a PR
