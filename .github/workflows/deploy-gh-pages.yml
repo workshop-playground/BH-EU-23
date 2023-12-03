@@ -39,28 +39,9 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Packaging Action
         uses: moractions/fake-packaging-action@v1.0.0
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./my-app
-          destination: ./_site      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+
       - name: Stop and Check Tracee results and create a PR
         uses: aquasecurity/tracee-action@v0.4.0-stop
         with:
          create-pr: "true"
          fail-on-diff: "false"
-
-  # Deployment job
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    if: ${{ github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
